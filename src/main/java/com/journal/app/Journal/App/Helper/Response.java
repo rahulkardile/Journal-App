@@ -5,32 +5,37 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-//@Component
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
+@Component
 public class Response {
     private String message;
     private int statusCode;
     private boolean success;
-
+    private Object data;
 
     public Response() {
-
     }
 
-    public Response(String message, int statusCode, boolean success) {
+    public Response(String message, int statusCode, boolean success, Object data) {
         this.message = message;
         this.statusCode = statusCode;
         this.success = success;
+        this.data = data;
     }
 
-    public boolean isSuccess() {
-        return success;
+    public Object getData() {
+        return data;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public int getStatusCode() {
@@ -41,11 +46,11 @@ public class Response {
         this.statusCode = statusCode;
     }
 
-    public String getMessage() {
-        return message;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }
