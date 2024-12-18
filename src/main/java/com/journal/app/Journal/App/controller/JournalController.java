@@ -44,12 +44,54 @@ public class JournalController {
 
         Response response = new Response();
         response.setMessage("Hey, entry created successfully!");
-        response.setStatusCode(HttpStatus.OK.value());
+        response.setStatusCode(HttpStatus.CREATED.value());
         response.setSuccess(true);
 
         response.setData(map.values());
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     };
+
+    @PatchMapping("/journal")
+    public ResponseEntity<?> updateEntry(@RequestBody JournalEntry entry) {
+        if (!map.containsKey(entry.getId())) {
+            Response response = new Response();
+            response.setMessage("Entry not found!");
+            response.setStatusCode(HttpStatus.NOT_FOUND.value());
+            response.setSuccess(false);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
+        map.put(entry.getId(), entry);
+
+        Response response = new Response();
+        response.setMessage("Entry updated successfully!");
+        response.setStatusCode(HttpStatus.OK.value());
+        response.setSuccess(true);
+        response.setData(map.values());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/journal/{id}")
+    public ResponseEntity<?> deleteEntry(@PathVariable int id) {
+        if (!map.containsKey(id)) {
+            Response response = new Response();
+            response.setMessage("Entry not found!");
+            response.setStatusCode(HttpStatus.NOT_FOUND.value());
+            response.setSuccess(false);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
+        map.remove(id);
+
+        Response response = new Response();
+        response.setMessage("Entry deleted successfully!");
+        response.setStatusCode(HttpStatus.OK.value());
+        response.setSuccess(true);
+        response.setData(map.values());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }
