@@ -52,5 +52,4 @@ public class JournalController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     };
 
-
 }

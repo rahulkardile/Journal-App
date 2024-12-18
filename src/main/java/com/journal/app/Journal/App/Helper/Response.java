@@ -1,8 +1,6 @@
 package com.journal.app.Journal.App.Helper;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
